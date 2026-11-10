@@ -74,26 +74,38 @@ export function Dagslistan() {
   return (
     <div className="min-h-screen bg-muted/40">
       <header className="no-print border-b border-border bg-background">
-        <div className="mx-auto flex max-w-5xl flex-wrap items-center gap-3 px-6 py-4">
-          <h1 className="mr-auto text-xl font-semibold tracking-tight">Dagslistan</h1>
-          <input ref={csvRef} type="file" accept=".csv,text/csv,.txt" hidden onChange={(e) => { onCsv(e.target.files?.[0]); e.target.value = ""; }} />
-          <input ref={xlsRef} type="file" accept=".xlsx,.xls,.xlsm,.csv" hidden onChange={(e) => { onXls(e.target.files?.[0]); e.target.value = ""; }} />
-          <button className="btn" onClick={() => csvRef.current?.click()}>Läs in CSV (Bokningar)</button>
-          <button className="btn" onClick={() => xlsRef.current?.click()}>Läs in Excel (Lagerplatser)</button>
+        <div className="mx-auto flex max-w-5xl items-center justify-between gap-4 px-6 py-5">
+          <div>
+            <h1 className="text-2xl font-semibold tracking-tight">Dagslistan</h1>
+            <p className="text-sm text-muted-foreground">Dagens bokningar med lagerplatser</p>
+          </div>
           <button className="btn btn-primary" disabled={!rows.length} onClick={() => window.print()}>Skriv ut A4</button>
-        </div>
-        <div className="mx-auto flex max-w-5xl flex-wrap gap-x-6 gap-y-1 px-6 pb-3 text-xs text-muted-foreground">
-          <span>Bokningar: {csvName || "ingen fil"}</span>
-          <span>Lagerplatser: {xlsName || "ingen fil"}</span>
         </div>
       </header>
 
       <main className="mx-auto max-w-5xl px-6 py-6 print:p-0">
+        <input ref={csvRef} type="file" accept=".csv,text/csv,.txt" hidden onChange={(e) => { onCsv(e.target.files?.[0]); e.target.value = ""; }} />
+        <input ref={xlsRef} type="file" accept=".xlsx,.xls,.xlsm,.csv" hidden onChange={(e) => { onXls(e.target.files?.[0]); e.target.value = ""; }} />
+        <div className="no-print mb-6 grid gap-3 sm:grid-cols-2">
+          {[
+            { label: "1. Bokningar (CSV)", name: csvName, ref: csvRef },
+            { label: "2. Lagerplatser (Excel)", name: xlsName, ref: xlsRef },
+          ].map((c) => (
+            <button key={c.label} onClick={() => c.ref.current?.click()} className="flex items-center justify-between rounded-lg border border-border bg-background px-4 py-3 text-left shadow-sm transition-colors hover:bg-muted">
+              <span>
+                <span className="block text-sm font-semibold">{c.label}</span>
+                <span className="block text-xs text-muted-foreground">{c.name || "Klicka för att välja fil"}</span>
+              </span>
+              <span className={`h-2.5 w-2.5 rounded-full ${c.name ? "bg-primary" : "bg-border"}`} />
+            </button>
+          ))}
+        </div>
+
         {error && <p className="no-print mb-4 rounded-md border border-destructive/40 bg-destructive/10 px-3 py-2 text-sm text-destructive">{error}</p>}
 
         {bookings.length > 0 && (
-          <div className="no-print mb-4 flex flex-wrap items-center gap-2">
-            <select value={date} onChange={(e) => setDate(e.target.value)} className="h-9 rounded-md border border-input bg-background px-3 text-sm">
+          <div className="no-print mb-4 flex flex-wrap items-center gap-3">
+            <select value={date} onChange={(e) => setDate(e.target.value)} className="h-9 rounded-md border border-input bg-background px-3 text-sm capitalize">
               {dates.map((d) => (
                 <option key={d} value={d}>{formatDateLabel(d)} ({d})</option>
               ))}
@@ -102,7 +114,7 @@ export function Dagslistan() {
               type="search"
               value={q}
               onChange={(e) => setQ(e.target.value)}
-              placeholder="Sök regnr eller kund…"
+              placeholder="Sök regnr eller namn…"
               className="ml-auto h-9 w-64 rounded-md border border-input bg-background px-3 text-sm outline-none focus:ring-2 focus:ring-ring"
             />
           </div>
