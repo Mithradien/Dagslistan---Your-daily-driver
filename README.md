@@ -27,16 +27,6 @@ Verktyget ska fungera 100 % lokalt i webbläsarens minne utan någon databas ell
 - Inga externa beroenden, inga molntjänster, inga sparade kakor eller tokens.
 - Skapa även en Dockerfile (Nginx Alpine) och en docker-compose.yml så att verktyget enkelt kan köras som en fristående container på port 8085 på en egen server.
 
-This project was built with [Lovable](https://lovable.dev).
-
-## Build with Lovable
-
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/9da8815d-7ed2-460f-a4b3-2936378f07bf).
-
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
-
 ## Development
 
 Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
