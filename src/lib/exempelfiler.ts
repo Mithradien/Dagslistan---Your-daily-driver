@@ -17,7 +17,8 @@ export function laddaNerExempelCsv() {
 }
 
 export async function laddaNerExempelExcel() {
-  const XLSX = await import("xlsx");
+  const m = await import("xlsx");
+  const XLSX = ((m as unknown as { default?: typeof m }).default?.write ? (m as unknown as { default: typeof m }).default : m);
   const ws = XLSX.utils.aoa_to_sheet([["Regnr", "Lagerplats"], ["ABC123", "A12-2"], ["GHI789", "B03-1"]]);
   const wb = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(wb, ws, "Lagerplatser");
