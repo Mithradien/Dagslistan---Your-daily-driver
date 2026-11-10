@@ -7,6 +7,7 @@ import {
   parseBookingsCsv,
   parseStorageExcel,
 } from "@/lib/dagslistan";
+import { laddaNerExempelCsv, laddaNerExempelExcel } from "@/lib/exempelfiler";
 
 export function Dagslistan() {
   const [bookings, setBookings] = useState<Booking[]>([]);
@@ -77,7 +78,7 @@ export function Dagslistan() {
         <div className="mx-auto flex max-w-5xl items-center justify-between gap-4 px-6 py-5">
           <div>
             <h1 className="text-2xl font-semibold tracking-tight">Dagslistan</h1>
-            <p className="text-sm text-muted-foreground">Dagens bokningar med lagerplatser · Exempelfiler: <a className="underline" href="./exempel/exempel-bokningar.csv" download>CSV</a>, <a className="underline" href="./exempel/exempel-lagerplatser.xlsx" download>Excel</a></p>
+            <p className="text-sm text-muted-foreground">Dagens bokningar med lagerplatser · Exempelfiler: <button type="button" className="underline" onClick={laddaNerExempelCsv}>CSV</button>, <button type="button" className="underline" onClick={() => void laddaNerExempelExcel()}>Excel</button></p>
           </div>
           <button className="btn btn-primary" disabled={!rows.length} onClick={() => window.print()}>Skriv ut A4</button>
         </div>
