@@ -7,6 +7,7 @@ import { fileURLToPath } from "node:url";
 export default defineConfig({
   root: "static",
   base: "./",
+  publicDir: "../public",
   plugins: [react(), tailwindcss()],
   resolve: { alias: { "@": fileURLToPath(new URL("./src", import.meta.url)) } },
   build: { outDir: "../dist-static", emptyOutDir: true },
