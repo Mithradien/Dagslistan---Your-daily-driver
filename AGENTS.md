@@ -28,3 +28,4 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+- Dagslistan UI lives in src/components/Dagslistan.tsx and is shared by the TanStack route and a standalone static build (static/ + vite.static.config.ts) used by the Nginx Dockerfile; keep it free of router/server dependencies.

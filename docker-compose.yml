@@ -1,0 +1,7 @@
+services:
+  dagslistan:
+    build: .
+    container_name: dagslistan
+    ports:
+      - "8085:80"
+    restart: unless-stopped
