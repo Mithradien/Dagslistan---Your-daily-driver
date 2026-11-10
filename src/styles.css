@@ -75,7 +75,7 @@
 :root {
   --radius: 0.625rem;
   --background: oklch(1 0 0);
-  --foreground: oklch(0.129 0.042 264.695);
+  --foreground: oklch(0.2 0.005 260);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.129 0.042 264.695);
   --popover: oklch(1 0 0);
@@ -152,4 +152,46 @@
     background-color: var(--color-background);
     color: var(--color-foreground);
   }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex h-9 items-center rounded-md border border-border bg-background px-3 text-sm font-medium text-foreground transition-colors hover:bg-muted disabled:opacity-50;
+  }
+  .btn-primary {
+    @apply border-primary bg-primary text-primary-foreground hover:bg-primary/90;
+  }
+  .chip {
+    @apply h-8 rounded-full border border-border bg-background px-3 text-sm capitalize text-foreground hover:bg-muted;
+  }
+  .chip-active {
+    @apply border-primary bg-primary text-primary-foreground hover:bg-primary;
+  }
+  .sheet {
+    @apply rounded-lg border border-border bg-background p-6 shadow-sm;
+  }
+  .day-table {
+    @apply w-full border-collapse text-sm;
+  }
+  .day-table th {
+    @apply border-b-2 border-foreground/70 px-2 py-2 text-left text-xs font-semibold uppercase tracking-wide text-muted-foreground;
+  }
+  .day-table td {
+    @apply border-b border-border px-2 py-2 align-top;
+  }
+}
+
+@page { size: A4 portrait; margin: 10mm; }
+
+@media print {
+  html, body { background: white !important; }
+  .no-print { display: none !important; }
+  .sheet { border: 0; box-shadow: none; padding: 0; border-radius: 0; }
+  .sheet h2 { font-size: 13pt; }
+  .day-table { font-size: 9pt; }
+  .day-table th { font-size: 7.5pt; padding: 2pt 4pt; color: black; }
+  .day-table td { padding: 2.5pt 4pt; line-height: 1.15; }
+  .day-table tr { break-inside: avoid; }
+  .print-dense .day-table { font-size: 8pt; }
+  .print-dense .day-table td { padding: 1pt 4pt; line-height: 1.1; }
 }
