@@ -78,7 +78,7 @@ export function Dagslistan() {
         <div className="mx-auto flex max-w-5xl items-center justify-between gap-4 px-6 py-5">
           <div>
             <h1 className="text-2xl font-semibold tracking-tight">Dagslistan</h1>
-            <p className="text-sm text-muted-foreground">Dagens bokningar med lagerplatser · Exempelfiler: <button type="button" className="underline" onClick={laddaNerExempelCsv}>CSV</button>, <button type="button" className="underline" onClick={() => void laddaNerExempelExcel()}>Excel</button></p>
+            <p className="text-sm text-muted-foreground">Dagens bokningar med lagerplatser · Exempelfiler: <button type="button" className="underline" onClick={laddaNerExempelCsv}>CSV</button>, <button type="button" className="underline" onClick={laddaNerExempelExcel}>Excel</button></p>
           </div>
           <button className="btn btn-primary" disabled={!rows.length} onClick={() => window.print()}>Skriv ut A4</button>
         </div>
