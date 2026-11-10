@@ -58,6 +58,19 @@ function normDate(d: string) {
   return s;
 }
 
+export function mapTjanst(raw: string): string {
+  const t = raw.toLowerCase();
+  const harMed = /har med/.test(t);
+  const finnsHos = /finns hos/.test(t);
+  const tarMed = /tar med/.test(t);
+  const forvara = /f(ö|o)rvara/.test(t);
+  if (harMed && tarMed) return "Skifte";
+  if (harMed && forvara) return "Nyförvaring";
+  if (finnsHos && forvara && !tarMed) return "Skifte med förvaring";
+  if ((finnsHos || forvara) && tarMed) return "Avslut";
+  return raw;
+}
+
 export function parseBookingsCsv(text: string): Booking[] {
   const lines = text.replace(/^\uFEFF/, "").split(/\r?\n/).filter((l) => l.trim());
   if (!lines.length) return [];
@@ -78,7 +91,7 @@ export function parseBookingsCsv(text: string): Booking[] {
       datum: normDate(get(r, iDatum)),
       tid: normTime(get(r, iTid)),
       regnr: get(r, iReg),
-      tjanst: get(r, iTj),
+      tjanst: mapTjanst(get(r, iTj)),
       kund: get(r, iKund),
       telefon: get(r, iTel),
     };
