@@ -93,11 +93,11 @@ export function Dagslistan() {
 
         {bookings.length > 0 && (
           <div className="no-print mb-4 flex flex-wrap items-center gap-2">
-            {dates.map((d) => (
-              <button key={d} onClick={() => setDate(d)} className={`chip ${d === date ? "chip-active" : ""}`}>
-                {formatDateLabel(d)}
-              </button>
-            ))}
+            <select value={date} onChange={(e) => setDate(e.target.value)} className="h-9 rounded-md border border-input bg-background px-3 text-sm">
+              {dates.map((d) => (
+                <option key={d} value={d}>{formatDateLabel(d)} ({d})</option>
+              ))}
+            </select>
             <input
               type="search"
               value={q}
@@ -126,7 +126,7 @@ export function Dagslistan() {
                   <th className="w-28">Regnummer</th>
                   <th>Tjänst</th>
                   <th className="w-28">Lagerplats</th>
-                  <th>Kund</th>
+                  <th>Namn</th>
                 </tr>
               </thead>
               <tbody>
